@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>工商系全国蹭饭图</title>
+</head>
+<body style='margin: 0'>
+<div id='map' style='width:100vw;height: 100vh;'></div>
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+<script src='./js/highmaps.js'></script>
+<script src='./js/drilldown.js'></script>
+<script src='./js/nunjucks.min.js'></script>
+
+<script src='./js/china.js'></script>
+<script src='./js/zhejiang.js'></script>
+<script src='./js/beijing.js'></script>
+<script src='./js/jiangsu.js'></script>
+<script src='./js/neimenggu.js'></script>
+<script src='./js/guangdong.js'></script>
+<script src='./js/tianjin.js'></script>
+<script src='./js/hebei.js'></script>
+<script src='./js/shanxi.js'></script>
+<script src='./js/liaoning.js'></script>
+<script src='./js/jilin.js'></script>
+<script src='./js/heilongjiang.js'></script>
+<script src='./js/shanghai.js'></script>
+<script src='./js/anhui.js'></script>
+<script src='./js/fujian.js'></script>
+<script src='./js/jiangxi.js'></script>
+<script src='./js/shandong.js'></script>
+<script src='./js/henan.js'></script>
+<script src='./js/hubei.js'></script>
+<script src='./js/hunan.js'></script>
+<script src='./js/guangxi.js'></script>
+<script src='./js/hainan.js'></script>
+<script src='./js/chongqing.js'></script>
+<script src='./js/sichuan.js'></script>
+<script src='./js/guizhou.js'></script>
+<script src='./js/yunnan.js'></script>
+<script src='./js/xizang.js'></script>
+<script src='./js/shanxi2.js'></script>
+<script src='./js/gansu.js'></script>
+<script src='./js/qinghai.js'></script>
+<script src='./js/ningxia.js'></script>
+<script src='./js/xinjiang.js'></script>
+<script>
+    let students = [
+       {name: '李嘉文',  province: '辽宁', city: '沈阳'},
+{name: '刘恒迪',  province: '贵州', city: '铜仁'},
+{name: '王鑫坤',  province: '云南', city: '大理白族'},
+{name: '汪蒙',  province: '广西', city: '贺州'},
+{name: '黎俊言',  province: '广西', city: '北海'},
+{name: '莫然',  province: '广西', city: '桂林'},
+{name: '周韵嘉',  province: '广西', city: '南宁'},
+{name: '王宣贻',  province: '山东', city: '淄博'},
+{name: '邱佳敏',  province: '上海', city: '金山区'},
+{name: '李萱',  province: '上海', city: '浦东新区'},
+{name: '肖乐',  province: '河北', city: '秦皇岛'},
+{name: '王思潼',  province: '辽宁', city: '铁岭'},
+{name: '李星瑶',  province: '辽宁', city: '辽阳'},
+{name: '张楷蔓',  province: '辽宁', city: '锦州'},
+{name: '于海天',  province: '辽宁', city: '本溪'},
+{name: '李婉钰',  province: '辽宁', city: '鞍山'},
+{name: '王嘉慧',  province: '辽宁', city: '沈阳'},
+{name: '陈孜',  province: '内蒙古', city: '通辽'},
+{name: '尹利爽',  province: '内蒙古', city: '通辽'},
+{name: '孟宏迪',  province: '内蒙古', city: '呼伦贝尔'},
+{name: '衣洋',  province: '内蒙古', city: '赤峰'},
+{name: '艾克达木·阿布都克热木',  province: '新疆', city: '伊犁哈萨克'},
+{name: '苏巴提·木塔力甫',  province: '新疆', city: '伊犁哈萨克'},
+{name: '马昊雯',  province: '青海', city: '西宁'},
+{name: '陈明月',  province: '吉林', city: '松原'},
+{name: '屈渤越',  province: '辽宁', city: '沈阳'},
+{name: '张洁',  province: '云南', city: '昆明'},
+{name: '段靖莲',  province: '云南', city: '大理白族'},
+{name: '冯奕茗',  province: '新疆', city: '乌鲁木齐'},
+{name: '兰顺雨',  province: '贵州', city: '遵义'},
+{name: '廖滢滢',  province: '广西', city: '来宾'},
+{name: '徐国富',  province: '广西', city: '贺州'},
+{name: '李敏',  province: '广西', city: '梧州'},
+{name: '王若溪',  province: '山东', city: '泰安'},
+{name: '孙雪怡',  province: '上海', city: '长宁区'},
+{name: '赵臻宇',  province: '上海', city: '松江区'},
+{name: '曹馨月',  province: '黑龙江', city: '黑河'},
+{name: '全明金',  province: '吉林', city: '延边'},
+{name: '张竞文',  province: '辽宁', city: '盘锦'},
+{name: '邹悦',  province: '辽宁', city: '盘锦'},
+{name: '刘佳怡',  province: '辽宁', city: '本溪'},
+{name: '隋译',  province: '辽宁', city: '丹东'},
+{name: '胡雨欣',  province: '辽宁', city: '抚顺'},
+{name: '徐敬贻',  province: '辽宁', city: '沈阳'},
+{name: '贺一帆',  province: '内蒙古', city: '鄂尔多斯'},
+{name: '李雨萱',  province: '内蒙古', city: '通辽'},
+{name: '王若瑜',  province: '内蒙古', city: '呼伦贝尔'},
+{name: '宋锡明',  province: '内蒙古', city: '呼伦贝尔'},
+{name: '刘蓬月',  province: '内蒙古', city: '赤峰'},
+{name: '张一丹',  province: '内蒙古', city: '呼和浩特'},
+{name: '再依娜甫·如孜买买提',  province: '新疆', city: '伊犁哈萨克'},
+{name: '怕丽达·努热买买提',  province: '新疆', city: '阿克苏'},
+{name: '刘曼',  province: '贵州', city: '遵义'},
+{name: '徐绍迪',  province: '吉林', city: '吉林'},
+{name: '孙强',  province: '内蒙古', city: '通辽'},
+{name: '周沛燃',  province: '云南', city: '普洱'},
+{name: '张慈',  province: '云南', city: '保山'},
+{name: '艾丽米热·艾合买提',  province: '新疆', city: '哈密'},
+{name: '王晓鸥',  province: '云南', city: '普洱'},
+
+    ];
+
+    let data = Highcharts.geojson(Highcharts.maps['cn/china']);
+
+    let provinces = {};
+    Highcharts.each(data, function (d) {
+        provinces[d.name] = d;
+        d.drilldown = d.name;
+        d.value = 0;
+        d.cities = {};
+        d.people = [];
+    });
+
+    for (let s of students) {
+        provinces[s.province].value++;
+        provinces[s.province].people.push(s)
+    }
+
+    for (let p of Object.values(provinces)) {
+        let filename = p.properties.filename;
+        if (!Highcharts.maps[`cn/${filename}`]) {
+            continue
+        }
+        let subData = p.subData = Highcharts.geojson(Highcharts.maps[`cn/${filename}`]);
+        Highcharts.each(subData, function (city) {
+            p.cities[city.name] = city;
+            city.value = 0;
+            city.people = [];
+        });
+        for (let s of students) {
+            if (p.cities[s.city] !== undefined) {
+                p.cities[s.city].value++;
+                p.cities[s.city].people.push(s);
+            }
+        }
+    }
+
+    function makeSeries() {
+        let series = [];
+        for (let p of Object.values(provinces)) {
+            if (p.subData) {
+                series.push({
+                    id: p.name,
+                    name: p.name,
+                    data: p.subData,
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}'
+                    }
+                })
+            }
+        }
+        return series;
+    }
+
+    function formatter() {
+        let template = `
+        <div class="tooltip">
+            <div class="series">{{series}}</div>
+            <div class="profile">
+                <div class="name">{{name}}:</div>
+                <div class="value">{{value}}人</div>
+            </div>
+            {% if name !== '' %}
+            <div class="list">
+                {% for p in people %}
+                <div class="pinfo">
+                    <div class="pname">{{p.name}}</div>
+                    <div class="city">{{p.city}}</div>
+                    <div class="school">{{p.school}}</div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        `;
+
+        return nunjucks.renderString(template, {
+            name: this.point.name,
+            series: this.series.name,
+            value: this.point.value,
+            people: this.point.people
+        });
+    }
+
+    // 初始化图表
+    let map = new Highcharts.Map('map', {
+            chart: {
+                events: {
+                    drilldown: function (e) {
+                        let name = e.point.name;
+                        this.setTitle(null, {text: name});
+                    },
+                    drillup: function () {
+                        data = Highcharts.maps['cn/china'];
+                        this.setTitle(null, {
+                            text: '大连民族大学'
+                        });
+                    }
+                }
+            },
+
+            title: {
+                text: '工商系全国蹭饭图',
+                style: {"color": "#333333", "fontSize": "24px"}
+            },
+
+            subtitle: {
+                text: '大连民族大学',
+                floating: true,
+                y: 50,
+                style: {
+                    fontSize: '16px'
+                }
+            },
+
+            tooltip: {
+                useHTML: true,
+                backgroundColor: '#357fee',
+                borderRadius: 5,
+                padding: 12,
+                style: {
+                    'color': '#dddddd',
+                    'cursor': 'default',
+                    'fontSize': '14px',
+                    'pointerEvents': 'none',
+                    'whiteSpace': 'nowrap'
+                },
+                formatter: formatter
+            },
+
+            colorAxis: {
+                min: 0,
+                max: 50,
+                type: 'linear',
+                minColor: '#ffffff',
+                maxColor: '#006cee',
+                stops: [
+                    [0, '#ffffff'],
+                    [0.02, '#a4d9ee'],
+                    [0.04, '#7ebaee'],
+                    [0.1, '#357fee'],
+                    [0.5, '#0c70ee'],
+                    [1, '#006cee']
+                ]
+            },
+
+            series: [{
+                data: data,
+                name: '各省人数',
+                joinBy: 'name',
+                tooltip: {
+                    pointFormat: `{point.name}: {point.value}`
+                }
+            }],
+
+            drilldown:
+                {
+                    activeDataLabelStyle: {
+                        color: '#FFFFFF',
+                        textDecoration:
+                            'none',
+                        textShadow:
+                            '0 0 3px #000000'
+                    }
+                    ,
+                    drillUpButton: {
+                        relativeTo: 'spacingBox',
+                        position:
+                            {
+                                x: 0,
+                                y:
+                                    60
+                            }
+                    }
+                    ,
+                    series: makeSeries()
+                }
+            ,
+
+            mapNavigation: {
+                enabled: true,
+                buttonOptions:
+                    {
+                        verticalAlign: 'bottom'
+                    }
+            }
+        })
+    ;
+</script>
+
+</body>
+</html>
